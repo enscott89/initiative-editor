@@ -1,0 +1,21 @@
+{
+  "id": "initiative-editor",
+  "title": "Initiative Editor",
+  "version": "1.0.6",
+  "url": "https://github.com/enscott89/initiative-editor",
+  "manifest": "https://raw.githubusercontent.com/enscott89/initiative-editor/main/module.json",
+  "compatibility": {
+    "minimum": "12",
+    "verified": "13"
+  },
+  "scripts": [
+    "scripts/initiative-editor.js"
+  ],
+  "styles": [
+    "styles/initiative-editor.css"
+  ],
+  "flags": {
+    "canUpload": true
+  },
+  "description": "Quickly assign, group, and manually reorder combatant initiative values from the combat tracker."
+}

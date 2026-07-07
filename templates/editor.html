@@ -1,0 +1,77 @@
+<form class="initiative-editor">
+  {{#if hasCombat}}
+    <section class="initiative-editor-toolbar">
+      <div class="initiative-editor-control">
+        <label for="initiative-editor-value">Set selected to</label>
+        <input id="initiative-editor-value" type="number" name="initiative-value" value="0" step="0.01" />
+        <button type="button" data-action="set-number">
+          <i class="fas fa-edit"></i>
+          Apply
+        </button>
+      </div>
+
+      <div class="initiative-editor-buttons">
+        <button type="button" data-action="players-first">
+          <i class="fas fa-users"></i>
+          Players First
+        </button>
+        <button type="button" data-action="refresh" title="Refresh combatants">
+          <i class="fas fa-sync-alt"></i>
+          Refresh
+        </button>
+        <button type="button" data-action="select-controlled">
+          <i class="fas fa-bullseye"></i>
+          Selected Tokens
+        </button>
+        <button type="button" data-action="select-players">Players</button>
+        <button type="button" data-action="select-npcs">NPCs</button>
+        <button type="button" data-action="select-all">All</button>
+        <button type="button" data-action="select-none">None</button>
+      </div>
+
+      <div class="initiative-editor-control">
+        <label for="initiative-editor-start">Order from</label>
+        <input id="initiative-editor-start" type="number" name="order-start" value="20" step="0.01" />
+        <label for="initiative-editor-step">step</label>
+        <input id="initiative-editor-step" type="number" name="order-step" value="1" min="0.01" step="0.01" />
+        <button type="button" data-action="apply-order">
+          <i class="fas fa-sort-amount-down"></i>
+          Apply Order
+        </button>
+      </div>
+    </section>
+
+    <ol class="initiative-editor-list">
+      {{#each combatants}}
+        <li
+          class="initiative-editor-row {{#if defeated}}is-defeated{{/if}}"
+          draggable="true"
+          data-combatant-id="{{id}}"
+          data-combatant-name="{{name}}"
+          data-token-id="{{tokenId}}"
+          data-player-owned="{{isPlayerOwned}}"
+        >
+          <span class="initiative-editor-grip"><i class="fas fa-grip-lines"></i></span>
+          <input type="checkbox" name="combatant" value="{{id}}" {{#if checked}}checked{{/if}} />
+          <img src="{{img}}" alt="" />
+          <span class="initiative-editor-name">{{name}}</span>
+          <span class="initiative-editor-tag">{{#if isPlayerOwned}}Player{{else}}NPC{{/if}}</span>
+          <input
+            class="initiative-editor-score"
+            type="number"
+            name="row-initiative"
+            value="{{initiative}}"
+            step="0.01"
+            title="Set initiative for {{name}}"
+          />
+        </li>
+      {{/each}}
+    </ol>
+
+    <p class="initiative-editor-note">
+      Combatants with the same initiative act as a tied group, but Foundry still advances through their turns one entry at a time.
+    </p>
+  {{else}}
+    <p class="initiative-editor-empty">Start or activate a combat encounter to edit initiatives.</p>
+  {{/if}}
+</form>
